@@ -47,42 +47,40 @@
 		};	
 		return{x1:oLeft, x2:oWidth, y1:oTop,y2:oHeight};
 	};
-		var timer;
-		e1.onmousemove = function(e) {
-			clearTimeout(timer);
-			timer = setTimeout(function(e) {
-					return function() {
-						judge(e);
-					}
-				}(e), 1000);
-		};
-		e2.onmousemove = function(e) {
-			clearTimeout(timer);
-			timer = setTimeout(function(e) {
-					return function() {
-						judge(e);
-					}
-				}(e), 1000);
-		};
-		e1.onmouseout = function() {
-			clearTimeout(timer);
-		};
-		e2.onmouseout = function() {
-			clearTimeout(timer);
-		};
+	var timer;
+	e1.onmousemove = function(e) {
+		clearTimeout(timer);
+		timer = setTimeout(function(e) {
+				return function() {
+					judge(e);
+				}
+			}(e), 1000);
+	};
+	e2.onmousemove = function(e) {
+		clearTimeout(timer);
+		timer = setTimeout(function(e) {
+				return function() {
+					judge(e);
+				}
+			}(e), 1000);
+	};
+	e1.onmouseout = function() {
+		clearTimeout(timer);
+	};
+	e2.onmouseout = function() {
+		clearTimeout(timer);
+	};
+	//获取鼠标位置;
+	function mousePosition(ev) {
+		var oEvent = ev || event;
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+		var xyArr = {x:oEvent.pageX, y:oEvent.pageY};
+		return xyArr;
+	};
 	//输出鼠标所在区域字符;
 	function judge(ev) {
-		//获取鼠标位置;
-		function mouse(ev) {
-			var oEvent = ev || event;
-			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-			var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
-			var xyArr = [];
-			xyArr.x = oEvent.pageX;
-			xyArr.y = oEvent.pageY;
-			return xyArr;
-		};
-		var xy = mouse(ev);
+		var xy = mousePosition(ev);
 		var results = [results1,results2]
 		for (var i = 0; i < results.length; i++) {
 			var ai = results[i].p;
@@ -93,17 +91,30 @@
 			};
 		};			
 	};
-	function alertSelection(e) {
-		 if (window.getSelection) { //Firefox、Chrome、Safari、Opera
-			alert(window.getSelection().toString()); 
-		 } 
-		 else if (document.selection && document.selection.createRange) { // IE 
-		      alert(document.selection.createRange().text);
-		};	 
+	//获取选中文字内容;
+	 function getSelect() {
+		var selectTxt;
+			if (window.getSelection) {//标准浏览器支持的方法
+ 				selectTxt = window.getSelection();
+			};
+			if (document.selection) {//IE浏览器支持的方法
+				selectTxt = document.selection.createRange().text;
+			};
+		return trim(selectTxt.toString());
 	};
+	//删除左右两端的空格;
+	function trim(str) { 
+		return str.replace(/(^\s*)|(\s*$)/g, "");
+　　};
 	e1.onmouseup = function(e) {
-		alertSelection(e);
+		var content = getSelect(e);
+		if (content != "" || null) {
+			alert(content);
+		};	
 	} ;
 	e2.onmouseup = function(e) {
-		alertSelection(e);
+		var content = getSelect(e);
+		if (content != "" || null) {
+			alert(content);
+		};
 	} ;
