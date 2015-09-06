@@ -1,36 +1,42 @@
 	// 在div中每个字符添加span标签的函数;
 	document.body.onload = function() {
-		results = getSpanPosition(container)
+		results = getSpanPosition(container);
 	};
 	function getSpanPosition(container) {
-		if (container.innerHTML !== undefined) {
-			var position = [];//存放位置的数组;
-			var word = [];//存放字符的数组;
-			var content = container.childNodes;
-			// 遍历子节点
-			for (var i = 0; i < content.length; i++) {
-				var a = content[i];
-					// 遍历文本节点内字符
-				if (a.constructor == Text) {
-					var span = [];
-					for (var y = 0; y < a.length; y++) {
-						var newa = document.createElement("span");
-						container.insertBefore(newa,a);
-						newa.innerText = a.nodeValue[y];							
-						span.push(newa);
-						var weizhi = getElementPosition(newa);
-						var node = a.nodeValue[y]
-						position.push(weizhi);
-						word.push(node)
-						console.log(weizhi,node);
-					};
-					for(var j = 0; j < span.length; j++) {
-						container.removeChild(span[j]);							
+		var resultp = [];
+		var resultw = [];
+		for (var z = 0; z < container.length; z++) {
+			if (container[z].innerHTML !== undefined) {
+				var position = [];//存放位置的数组;
+				var word = [];//存放字符的数组;
+				var content = container[z].childNodes;
+				// 遍历子节点
+				for (var i = 0; i < content.length; i++) {
+					var a = content[i];
+						// 遍历文本节点内字符
+					if (a.constructor == Text) {
+						var span = [];
+						for (var y = 0; y < a.length; y++) {
+							var newa = document.createElement("span");
+							container[z].insertBefore(newa,a);
+							newa.innerText = a.nodeValue[y];							
+							span.push(newa);
+							var weizhi = getElementPosition(newa);
+							var node = a.nodeValue[y]
+							position.push(weizhi);
+							word.push(node)
+							console.log(weizhi,node);
+						};
+						for(var j = 0; j < span.length; j++) {
+							container[z].removeChild(span[j]);							
+						};
 					};
 				};
 			};
-			return {p:position,w:word};
+			resultp.push(position);
+			resultw.push(word);
 		};
+		return {p:resultp,w:resultw};
 	};
 	// 获取dom元素位置的函数;
 	function getElementPosition(element) {
@@ -45,17 +51,21 @@
 		};	
 		return{x1:oLeft, x2:oWidth, y1:oTop,y2:oHeight};
 	};
-	var timer;
-	container.onmousemove = function(e) {
-		clearTimeout(timer);
-		timer = setTimeout(function(e) {
+		var timer;
+	for (var i = 0; i < container.length; i++) {
+		container[i].onmousemove = function(e) {
+			clearTimeout(timer);
+			timer = setTimeout(function(e) {
 				return function() {
 					judge(e);
 				}
 			}(e), 1000);
+		};
 	};
-	container.onmouseout = function() {
-		clearTimeout(timer);
+	for (var i = 0; i < container.length; i++) {
+		container[i].onmouseout = function() {
+			clearTimeout(timer);
+		};
 	};
 	//获取鼠标位置;
 	function mousePosition(ev) {
@@ -68,10 +78,12 @@
 	//输出鼠标所在区域字符;
 	function judge(ev) {
 		var xy = mousePosition(ev);
-		var ai = results.p;
-		for (var y = 0; y < ai.length; y++) {
-			if (xy.x >= ai[y].x1 && xy.x <= ai[y].x2 && xy.y >= ai[y].y1 && xy.y <= ai[y].y2) { 
-				alert(results.w[y]);
+		var p = results.p;
+		for (var i = 0;  i < p.length; i ++) {			
+			for (var y = 0; y < p[i].length; y++) {
+				if (xy.x >= p[i][y].x1 && xy.x <= p[i][y].x2 && xy.y >= p[i][y].y1 && xy.y <= p[i][y].y2) { 
+					alert(results.w[i][y]);
+				};
 			};
 		};			
 	};
@@ -90,9 +102,11 @@
 	function trim(str) { 
 		return str.replace(/(^\s*)|(\s*$)/g, "");
 　　};
-	container.onmouseup = function(e) {
-		var content = getSelect(e);
-		if (content != "" || null) {
-			alert(content);
-		};	
-	} ;
+	for (var i = 0; i < container.length; i++) {
+		container[i].onmouseup = function(e) {
+			var content = getSelect(e);
+			if (content != "" || null) {
+				alert(content);
+			};	
+		} ;
+	};
