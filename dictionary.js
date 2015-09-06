@@ -1,9 +1,7 @@
 	// 在div中每个字符添加span标签的函数;
 	document.body.onload = function() {
-		results1 = getSpanPosition(e1), results2 = getSpanPosition(e2)
+		results = getSpanPosition(container)
 	};
-	var e1 = document.getElementById("container");
-	var e2 = document.getElementById("container2");
 	function getSpanPosition(container) {
 		if (container.innerHTML !== undefined) {
 			var position = [];//存放位置的数组;
@@ -48,7 +46,7 @@
 		return{x1:oLeft, x2:oWidth, y1:oTop,y2:oHeight};
 	};
 	var timer;
-	e1.onmousemove = function(e) {
+	container.onmousemove = function(e) {
 		clearTimeout(timer);
 		timer = setTimeout(function(e) {
 				return function() {
@@ -56,18 +54,7 @@
 				}
 			}(e), 1000);
 	};
-	e2.onmousemove = function(e) {
-		clearTimeout(timer);
-		timer = setTimeout(function(e) {
-				return function() {
-					judge(e);
-				}
-			}(e), 1000);
-	};
-	e1.onmouseout = function() {
-		clearTimeout(timer);
-	};
-	e2.onmouseout = function() {
+	container.onmouseout = function() {
 		clearTimeout(timer);
 	};
 	//获取鼠标位置;
@@ -81,13 +68,10 @@
 	//输出鼠标所在区域字符;
 	function judge(ev) {
 		var xy = mousePosition(ev);
-		var results = [results1,results2]
-		for (var i = 0; i < results.length; i++) {
-			var ai = results[i].p;
-			for (var y = 0; y < ai.length; y++) {
-				if (xy.x >= ai[y].x1 && xy.x <= ai[y].x2 && xy.y >= ai[y].y1 && xy.y <= ai[y].y2) { 
-					alert(results[i].w[y]);
-				};
+		var ai = results.p;
+		for (var y = 0; y < ai.length; y++) {
+			if (xy.x >= ai[y].x1 && xy.x <= ai[y].x2 && xy.y >= ai[y].y1 && xy.y <= ai[y].y2) { 
+				alert(results.w[y]);
 			};
 		};			
 	};
@@ -106,15 +90,9 @@
 	function trim(str) { 
 		return str.replace(/(^\s*)|(\s*$)/g, "");
 　　};
-	e1.onmouseup = function(e) {
+	container.onmouseup = function(e) {
 		var content = getSelect(e);
 		if (content != "" || null) {
 			alert(content);
 		};	
-	} ;
-	e2.onmouseup = function(e) {
-		var content = getSelect(e);
-		if (content != "" || null) {
-			alert(content);
-		};
 	} ;
