@@ -84,6 +84,8 @@
 			for (var y = 0; y < p[i].length; y++) {
 				if (xy.x >= p[i][y].x1 && xy.x <= p[i][y].x2 && xy.y >= p[i][y].y1 && xy.y <= p[i][y].y2) { 
 					explain.style.display = "block";
+					explain.style.left = p[i][y].x2+ "px"+10+"px";
+					explain.style.top= p[i][y].y2+"px" +10 + "px";
 				};
 			};
 		};			
