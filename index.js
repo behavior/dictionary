@@ -25,7 +25,7 @@
 							var node = a.nodeValue[y]
 							position.push(weizhi);
 							word.push(node)
-							console.log(weizhi,node);
+							//console.log(weizhi,node);
 						};
 						for(var j = 0; j < span.length; j++) {
 							container[z].removeChild(span[j]);							
@@ -65,6 +65,7 @@
 	for (var i = 0; i < container.length; i++) {
 		container[i].onmouseout = function() {
 			clearTimeout(timer);
+			//explain.style.display = "none"
 		};
 	};
 	//获取鼠标位置;
@@ -82,7 +83,7 @@
 		for (var i = 0;  i < p.length; i ++) {			
 			for (var y = 0; y < p[i].length; y++) {
 				if (xy.x >= p[i][y].x1 && xy.x <= p[i][y].x2 && xy.y >= p[i][y].y1 && xy.y <= p[i][y].y2) { 
-					alert(results.w[i][y]);
+					explain.style.display = "block";
 				};
 			};
 		};			
@@ -106,7 +107,7 @@
 		container[i].onmouseup = function(e) {
 			var content = getSelect(e);
 			if (content != "" || null) {
-				alert(content);
+				explain.style.display = "block";
 			};	
 		} ;
 	};
