@@ -1,5 +1,6 @@
-	
-	function getSpanPosition(container) {
+// bindWordsCatcher(dom);
+function bindWordsCatcher(container) {
+	function getWordPosition(container) {
 		if (container.innerHTML !== undefined) {
 			var position = [];//存放位置的数组;
 			var word = [];//存放字符的数组;
@@ -29,6 +30,7 @@
 		};
 		return {p: position, w: word};
 	};
+
 	// 获取dom元素位置的函数;
 	function getElementPosition(element) {
 		var oLeft = element.offsetLeft;
@@ -42,7 +44,10 @@
 		};	
 		return{x1:oLeft, x2:oWidth, y1:oTop,y2:oHeight};
 	};
-	var timer;
+
+	var timer,
+		positions = getWordPosition(container);
+
 	container.onmousemove = function(e) {
 		clearTimeout(timer);
 		timer = setTimeout(function(e) {
@@ -53,16 +58,8 @@
 	};
 	container.onmouseout = function() {
 		clearTimeout(timer);
-		//explain.style.display = "none"
 	};
-	//获取鼠标位置;
-	function mousePosition(ev) {
-		var oEvent = ev || event;
-		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-		var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
-		var xyArr = {x:oEvent.pageX, y:oEvent.pageY};
-		return xyArr;
-	};
+
 	//输出鼠标所在区域字符;
 	function judge(ev) {
 		var xy = mousePosition(ev);
@@ -74,6 +71,15 @@
 				explain.style.top= p[y].y2+"px" +10 + "px";
 			};
 		};			
+	};
+
+	//获取鼠标位置;
+	function mousePosition(ev) {
+		var oEvent = ev || event;
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+		var xyArr = {x:oEvent.pageX, y:oEvent.pageY};
+		return xyArr;
 	};
 	//获取选中文字内容;
 	function getSelect() {
@@ -95,4 +101,5 @@
 		if (content != "" || null) {
 			explain.style.display = "block";
 		};	
-	} ;
+	};
+}
