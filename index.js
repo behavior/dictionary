@@ -13,16 +13,16 @@ HTMLElement.prototype.bindWordsCatcher = function (methods) {
   while(methods.length) {
     var method = methods.shift();
     if (method === "point") {
-      document.body.addEventListener('load', pointCatcher, false);
+      pointCatcher(container);
     } else if (method === "select") {
-      document.body.addEventListener('load', selectCatcher, false);
+      selectCatcher(container);
     } else {
       throw new Error("The catcher is not exist.");
     };
   };
 };
 
-function pointCatcher() {
+function pointCatcher(container) {
   //利用辅助span节点获取容器内每个字符及其坐标;
   function getWordPosition (container) {
     if (container.innerHTML !== undefined) {
@@ -57,8 +57,9 @@ function pointCatcher() {
     var oEvent = ev || event;
     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
-    var xyArr = {x: oEvent.pageX, y: oEvent.pageY};
-    return xyArr;
+    var position = {x: oEvent.pageX, y: oEvent.pageY};
+  
+    return position;
   };
 
   //输出鼠标所在区域字符;
@@ -70,26 +71,10 @@ function pointCatcher() {
           xy.y >= positions[i].position.y1 && 
           xy.y <= positions[i].position.y2) 
       {  
+
         console.log(positions[i].word);
       };
     };
-  };
-  // 全部字位置信息
-  var positions = [];
-  //定时器Handle;
-  var timer;
-  // 光标移入事件定义
-  container.onmousemove = function (e) {
-    clearTimeout(timer);
-    timer = setTimeout(function(e) {
-      return function () {
-        judge(e);
-      };
-    }(e), 1000);
-  };
-  // 光标移出事件定义
-  container.onmouseout = function () {
-    clearTimeout(timer);
   };
 
   // 扩展DOM获取位置方法;
@@ -105,9 +90,29 @@ function pointCatcher() {
     };  
     return{x1: oLeft, x2: oWidth, y1: oTop, y2: oHeight};
   };
+
+  // 全部字位置信息
+  var positions = [];
+  //定时器Handle;
+  var timer;
+  // 
+  getWordPosition(container);
+  // 光标移入事件定义
+  container.onmousemove = function (e) {
+    clearTimeout(timer);
+    timer = setTimeout(function(e) {
+      return function () {
+        judge(e);
+      };
+    }(e), 1000);
+  };
+  // 光标移出事件定义
+  container.onmouseout = function () {
+    clearTimeout(timer);
+  };
 }
 
-function selectCatcher() {
+function selectCatcher(container) {
   //获取选中文字内容;
   function getSelect() {
     var selectTxt;
@@ -128,6 +133,7 @@ function selectCatcher() {
   container.onmouseup = function(e) {
     var content = getSelect(e);
     if (content != "" || null) {
+      console.log(123);
       explain.style.display = "block";
     };  
   };
