@@ -1,41 +1,44 @@
-@charset "UTF-8";
-/**
- * 
- * @authors Your Name (you@example.org)
- * @date    2015-09-07 11:10:22
- * @version $Id$
- */
-#explain {
-	width: 250px;
-	height: 300px;
-	background:#F2F2F2;
-	display: none;
-	position: relative;
-}
-#header {
-	width: 250px;
-	height: 25px;
-	background:#303030;
-	text-align:right;
-}
-#content {
-	margin: auto;
-	width:93%;
-	height: 90%;
-	background: #FFFFFF;
-	overflow: auto;
-}
-#footer {
-	width: 250px;
-	height: 25px;
-	background: #666666
-}
-#source {
-	list-style :none;
-	margin: 0;
-}
-li {
-	display: inline;
-	width: 40px;
-	font-size:12px;
-}
+	@charset "UTF-8";
+	/**
+	 * 
+	 * @authors Your Name (you@example.org)
+	 * @date    2015-09-07 11:10:22
+	 * @version $Id$
+	 */
+	/*#container1 {
+		position: absolute;
+	}*/
+	#explain {
+		width: 250px;
+		height: 300px;
+		background:#F2F2F2;
+		display: none;
+		position: absolute;
+	}
+	#header {
+		width: 250px;
+		height: 25px;
+		/*background:#303030;*/
+		text-align:right;
+	}
+	#content {
+		margin: auto;
+		width:93%;
+		height: 90%;
+		/*background: #FFFFFF;*/
+		overflow: auto;
+	}
+	#footer {
+		width: 250px;
+		height: 25px;
+		/*background: #666666*/
+	}
+	#source {
+		list-style :none;
+		margin: 0;
+	}
+	li {
+		display: inline;
+		width: 40px;
+		font-size:12px;
+	}

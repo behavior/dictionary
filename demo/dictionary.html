@@ -9,69 +9,69 @@
 <link href="explain.css" rel="stylesheet">
 <script language="JavaScript" src="../index.js"></script>
 <script type="text/javascript">
-	window.onload = function () {	
+	window.onload = function () {
 	var words = document.getElementById("container1");
-	words.bindWordsCatcher("point","select");
+	words.bindWordsCatcher(["point","select"]);
 	};
 </script>
 </head>
 <body>
 	<div id="container1">123<img src="shi.jpg"/>456</div> 
 	<div id="container2">654321</div>
-	<p id="word">hello,world!</p>
+	<p id="string">hello,world!</p>
 	<div id = "explain" >
 	    	<div id = "header">
 	    		<button>帮助</button>
 	    		<button>详细解释</button>
-	    		<button>关闭</button>
+	    		<button id = "close">关闭</button>
 	    	</div>
-    	<div id = "content">
-    		<ul id = "source">
-    			<li>基本解释</li>
-    			<li>康熙字典</li>
-    			<li>说文解字</li>
-    		</ul>
-    		<p id = "word">好</p>
-    		<p>
-    			基本信息<br/>
-    			基本信息<br/>
-    			基本信息<br/>
-    			基本信息<br/>
-    		</p>
-    		<h4>基本字义</h4>
-	    	<p>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-		    	基本解释<br/>
-	    	</p>
-	    	<h4>其它字义</h4>
-	    	<p>
-	    		其它解释<br/>
-		    	其它解释<br/>
-		    	其它解释<br/>
-		    	其它解释<br/>
-		    	其它解释<br/>
-		    	其它解释<br/>
-		    	其它解释<br/>
-	    	</p>
-    	</div>
-    	<div id = "footer">	    		
-    	</div>
+	    	<div id = "content">
+	    		<ul id = "source">
+	    			<li>基本解释</li>
+	    			<li>康熙字典</li>
+	    			<li>说文解字</li>
+	    		</ul>
+	    		<p id = "word">好</p>
+	    		<p>
+	    			基本信息<br/>
+	    			基本信息<br/>
+	    			基本信息<br/>
+	    			基本信息<br/>
+	    		</p>
+	    		<h4>基本字义</h4>
+		    	<p>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+			    	基本解释<br/>
+		    	</p>
+		    	<h4>其它字义</h4>
+		    	<p>
+		    		其它解释<br/>
+			    	其它解释<br/>
+			    	其它解释<br/>
+			    	其它解释<br/>
+			    	其它解释<br/>
+			    	其它解释<br/>
+			    	其它解释<br/>
+		    	</p>
+	    	</div>
+	    	<div id = "footer">	    		
+	    	</div>
   	</div>
 </body>
 </html>
