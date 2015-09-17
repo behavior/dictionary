@@ -23,38 +23,23 @@ HTMLElement.prototype.bindWordsCatcher = function (methods) {
 	};
 };
 
-//创建dictionaryDiv;
-function dictionaryDiv() {
-	function createElements (newDiv, target, key, value) {
-		var newDiv = document.createElement(newDiv);
-		var target = document.getElementById(target);
-		target.appendChild(newDiv);
-		newDiv.setAttribute(key, value);
-	};
-	createElements ("div", "webcontainer", "id", "explain");
-	createElements ("p", "explain", "id", "word");
-	// alert(explain+word);
-	//输出鼠标所在区域字符;
-	function judge (ev) {
-		var xy = getMousePosition(ev);
-		for (var i = 0; i < positions.length; i++) {
-			if (xy.x >= positions[i].position.x1 && 
-			xy.x <= positions[i].position.x2 && 
-			xy.y >= positions[i].position.y1 && 
-			xy.y <= positions[i].position.y2) 
-			{ 
-				explain.style.display = "block";
-				explain.style.left = positions[i].position.x2 +"px";
-				explain.style.top = positions[i].position.y2 +"px";
-				word.innerText= positions[i].word;
-			};
-		};
-	};
-};
+
 
 function pointCatcher(container) {
 	// 全部字位置信息
 	var positions = [];
+	//创建dictionaryDiv;
+	function dictionaryDiv() {
+		function createElements (newDiv, target, key, value) {
+			var newDiv = document.createElement(newDiv);
+			var target = document.getElementById(target);
+			target.appendChild(newDiv);
+			newDiv.setAttribute(key, value);
+		};
+		createElements ("div", "webcontainer", "id", "explain");
+		createElements ("p", "explain", "id", "word");
+	};
+
 	//利用辅助span节点获取容器内每个字符及其坐标;
 	function getWordPosition (container) {
 		if (container.innerHTML !== undefined) {
@@ -93,7 +78,6 @@ function pointCatcher(container) {
 		return position;
 	};
 
-
 	// 扩展DOM获取位置方法;
 	HTMLElement.prototype.getPosition = function () {
 		var oLeft = this.offsetLeft;
@@ -108,34 +92,64 @@ function pointCatcher(container) {
 		return{x1: oLeft, x2: oWidth, y1: oTop, y2: oHeight};
 	};
 
-		//定时器Handle;
-		var timer1;
-		var timer2;
-		getWordPosition(container);
+	//输出鼠标所在区域字符;
+	function judge (ev) {
+		var xy = getMousePosition(ev);
+		for (var i = 0; i < positions.length; i++) {
+			if (xy.x >= positions[i].position.x1 && 
+			xy.x <= positions[i].position.x2 && 
+			xy.y >= positions[i].position.y1 && 
+			xy.y <= positions[i].position.y2) 
+			{ 	
+				// alert("123");
+				explain.style.display = "block";
+				explain.style.left = positions[i].position.x2 +"px";
+				explain.style.top = positions[i].position.y2 +"px";
+				word.innerText= positions[i].word;
+			};
+		};
+	};
 
+		//定时器Handle;
+		var timer;
+		//var timer2;
+		getWordPosition(container);
+		dictionaryDiv();
+
+	var explain = document.getElementById("explain");
 	// 光标移入字符事件定义
 	container.onmousemove = function (e) {
-		clearTimeout(timer1);
-		timer1 = setTimeout(function(e) {
+		clearTimeout(timer);
+		setTimeout(function(e) {
 			return function () {
-				dictionaryDiv();
 				judge(e);			
 			};
 		}(e), 1000);
 	};
-	var explain = document
-	// // 光标移入字典框事件定义
-	// explain.onmousemove = function () {
-	// 	clearTimeout(timer2);
-	// 	explain.style.display = "block";
-	// };
 
-	// // 光标移出字典框事件定义
-	// explain.onmouseout = function () {
-	// 	timer2 = setTimeout(function() {
-	// 		explain.style.display = "none"
-	// 	},500);
-	// };
+	container.onmouseout = function() {
+		timer = setTimeout(function() {
+			// var div = document.getElementById("webcontainer");
+			// var explain = document.getElementById("explain");
+			// div.removeChild(explain);
+			explain.style.display = "none";
+		},1000);		
+	};
+
+	// 光标移入字典框事件定义
+	explain.onmousemove = function () {
+		clearTimeout(timer);
+		explain.style.display = "block";
+	};
+	// 光标移出字典框事件定义
+	explain.onmouseout = function () {
+		timer = setTimeout(function() {
+			explain.style.display = "none"
+		},500);
+	};
+
+
+
 
 	// var closebtn = document.getElementById("close");
 	// closebtn.onclick =  function () {
