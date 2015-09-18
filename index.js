@@ -23,8 +23,6 @@ HTMLElement.prototype.bindWordsCatcher = function (methods) {
 	};
 };
 
-
-
 function pointCatcher(container) {
 	// 全部字位置信息
 	var positions = [];
@@ -101,7 +99,6 @@ function pointCatcher(container) {
 			xy.y >= positions[i].position.y1 && 
 			xy.y <= positions[i].position.y2) 
 			{ 	
-				// alert("123");
 				explain.style.display = "block";
 				explain.style.left = positions[i].position.x2 +"px";
 				explain.style.top = positions[i].position.y2 +"px";
@@ -110,13 +107,12 @@ function pointCatcher(container) {
 		};
 	};
 
-		//定时器Handle;
-		var timer;
-		//var timer2;
-		getWordPosition(container);
-		dictionaryDiv();
+	//定时器Handle;
+	var timer;
+	getWordPosition(container);
+	dictionaryDiv();
+	// var explain = document.getElementById("explain");
 
-	var explain = document.getElementById("explain");
 	// 光标移入字符事件定义
 	container.onmousemove = function (e) {
 		clearTimeout(timer);
@@ -148,9 +144,6 @@ function pointCatcher(container) {
 		},500);
 	};
 
-
-
-
 	// var closebtn = document.getElementById("close");
 	// closebtn.onclick =  function () {
 	// 	explain.style.display = "none";
@@ -159,6 +152,16 @@ function pointCatcher(container) {
 
 function selectCatcher(container) {
 	//获取选中文字内容;
+	function dictionaryDiv() {
+		function createElements (newDiv, target, key, value) {
+			var newDiv = document.createElement(newDiv);
+			var target = document.getElementById(target);
+			target.appendChild(newDiv);
+			newDiv.setAttribute(key, value);
+		};
+		createElements ("div", "webcontainer", "id", "explain");
+		createElements ("p", "explain", "id", "word");
+	};
 	function getSelect() {
 		var selectTxt;
 		if (window.getSelection) {//标准浏览器支持的方法
@@ -177,6 +180,7 @@ function selectCatcher(container) {
 	//鼠标选中事件;
 	container.onmouseup = function(e) {
 		dictionaryDiv();
+		var explain = document.getElementById("explain");
 		e = e || window.event;
 		var content = getSelect(e);
 		if (content != "" || null) {

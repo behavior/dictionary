@@ -10,15 +10,15 @@
 <script type="text/javascript" src= "../ajax.js"></script>
 <script language="JavaScript" src="../index.js"></script>
 <script type="text/javascript">
-		ajax('dictionary.html', function (div) {
-			alert(div);
-			// explain.innerHtml = div;			
-		}, function () {
-			alert("Faild");
-		});
 	window.onload = function () {
 		var words = document.getElementById("container1");
 		words.bindWordsCatcher(["point","select"]);
+		ajax('dictionary.html', function (div) {
+			var explain = document.getElementById("explain");
+			explain.innerHtml = div;	
+		}, function () {
+			alert("Faild");
+		});
 	};
 </script>
 </head>
