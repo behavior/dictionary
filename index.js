@@ -4,11 +4,11 @@ HTMLElement.prototype.bindWordsCatcher = function (methods) {
 	// 判断处理参数method
 	if (methods === undefined) {
 		methods = ["point", "select"];
-	} else if (typeof(methods) === 'string') {
+	} else if (typeof(methods) === "string") {
 		methods = [methods];
 	} else if (methods.constructor !== Array) {
 		throw new Error('The parem is illegal.');
-	}; 
+	};
 
 	while(methods.length) {
 		var method = methods.shift();
@@ -94,11 +94,11 @@ function pointCatcher(container) {
 	function judge (ev) {
 		var xy = getMousePosition(ev);
 		for (var i = 0; i < positions.length; i++) {
-			if (xy.x >= positions[i].position.x1 && 
-			xy.x <= positions[i].position.x2 && 
-			xy.y >= positions[i].position.y1 && 
-			xy.y <= positions[i].position.y2) 
-			{ 	
+			if (xy.x >= positions[i].position.x1 &&
+			xy.x <= positions[i].position.x2 &&
+			xy.y >= positions[i].position.y1 &&
+			xy.y <= positions[i].position.y2)
+			{
 				explain.style.display = "block";
 				explain.style.left = positions[i].position.x2 +"px";
 				explain.style.top = positions[i].position.y2 +"px";
@@ -110,21 +110,22 @@ function pointCatcher(container) {
 	var timer;
 	getWordPosition(container);
 	dictionaryDiv();
+	var explain = document.getElementById("explain");
 
 	// 光标移入字符事件定义
 	container.onmousemove = function (e) {
 		clearTimeout(timer);
 		setTimeout(function(e) {
 			return function () {
-				judge(e);			
+				judge(e);
 			};
 		}(e), 1000);
 	};
-
+	// 光标移出字符事件定义
 	container.onmouseout = function() {
 		timer = setTimeout(function() {
 			explain.style.display = "none";
-		},1000);		
+		},1000);
 	};
 
 	// 光标移入字典框事件定义
@@ -149,7 +150,7 @@ function selectCatcher(container) {
 			target.appendChild(newDiv);
 			newDiv.setAttribute(key, value);
 		};
-		createElements ("div", "webcontainer", "id", "explain");
+		createElements ("div", "webcontainer", "id", "explain") ;
 		createElements ("p", "explain", "id", "word");
 	};
 	function getSelect() {
@@ -163,19 +164,25 @@ function selectCatcher(container) {
 		return trim(selectTxt.toString());
 	};
 	//删除左右两端的空格;
-	function trim(str) { 
+	function trim(str) {
 		return str.replace(/(^\s*)|(\s*$)/g, "");
+
 	};
-	
 	//鼠标选中事件;
+	dictionaryDiv();
 	container.onmouseup = function(e) {
-		dictionaryDiv();
-		var explain = document.getElementById("explain");
-		e = e || window.event;
-		var content = getSelect(e);
-		if (content != "" || null) {
-			explain.style.display = "block";
-			explain.style.top = content.top + content.height + "px";
-		};  
+		setTimeout(function() {
+			var explain = document.getElementById("explain");
+			e = e || window.event;
+			var content = getSelect(e);
+			var left = e.clientX + 10;
+			var top = e.clientY + 10;
+			if (content != "" || null) {
+				explain.style.display = "block";
+				explain.style.left = left + "px";
+				explain.style.top = top + "px";
+				content = explain.innerText;
+			};
+		},200);
 	};
 };
