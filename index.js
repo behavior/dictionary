@@ -102,7 +102,6 @@ function pointCatcher(container) {
 				explain.style.display = "block";
 				explain.style.left = positions[i].position.x2 +"px";
 				explain.style.top = positions[i].position.y2 +"px";
-				word.innerText= positions[i].word;
 			};
 		};
 	};
@@ -111,7 +110,6 @@ function pointCatcher(container) {
 	var timer;
 	getWordPosition(container);
 	dictionaryDiv();
-	// var explain = document.getElementById("explain");
 
 	// 光标移入字符事件定义
 	container.onmousemove = function (e) {
@@ -125,9 +123,6 @@ function pointCatcher(container) {
 
 	container.onmouseout = function() {
 		timer = setTimeout(function() {
-			// var div = document.getElementById("webcontainer");
-			// var explain = document.getElementById("explain");
-			// div.removeChild(explain);
 			explain.style.display = "none";
 		},1000);		
 	};
@@ -143,11 +138,6 @@ function pointCatcher(container) {
 			explain.style.display = "none"
 		},500);
 	};
-
-	// var closebtn = document.getElementById("close");
-	// closebtn.onclick =  function () {
-	// 	explain.style.display = "none";
-	// };
 };
 
 function selectCatcher(container) {
@@ -186,7 +176,6 @@ function selectCatcher(container) {
 		if (content != "" || null) {
 			explain.style.display = "block";
 			explain.style.top = content.top + content.height + "px";
-			word.innerText = content;
 		};  
 	};
 };

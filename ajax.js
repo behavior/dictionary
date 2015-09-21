@@ -6,7 +6,6 @@ function ajax (url, fnSucc, fnFaild) {
 		oAjax = new ActiveXObject("Microsoft.XMLHttp");
 	};
 	oAjax.open("GET", url, true);
-	oAjax.send();
 	oAjax.onreadystatechange = function () {
 		if (oAjax.readyState == 4) {
 			if (oAjax.status == 200) {
@@ -18,4 +17,5 @@ function ajax (url, fnSucc, fnFaild) {
 			};
 		};
 	};
+	oAjax.send();
 };
