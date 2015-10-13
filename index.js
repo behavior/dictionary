@@ -4,13 +4,19 @@ HTMLElement.prototype.bindWordsCatcher = function (methods) {
 	// 判断处理参数method
 	if (methods === undefined) {
 		methods = ["point", "select"];
-	} else if (typeof(methods) === "string") {
+	} else if (typeof(methods) === 'string') {
 		methods = [methods];
 	} else if (methods.constructor !== Array) {
 		throw new Error('The parem is illegal.');
+<<<<<<< HEAD
 	};
 	pointCatcher(container);
 	/*while(methods.length) {
+=======
+	}; 
+
+	while(methods.length) {
+>>>>>>> d219323c45cdb64d0719ad5a7fd1668dc7645d83
 		var method = methods.shift();
 		if (method === "point") {
 			if(typeof(document.onmouseup) !== true) {
@@ -18,13 +24,15 @@ HTMLElement.prototype.bindWordsCatcher = function (methods) {
 			}
 
 		} else if (method === "select") {
-			selectCatcher(container);
+			selectCatche r(container);
 		}
 		 else {
 			throw new Error("The catcher is not exist.");
 		};
 	};*/
 };
+
+
 
 function pointCatcher(container) {
 	// 全部字位置信息
@@ -95,41 +103,62 @@ function pointCatcher(container) {
 	function judge (ev) {
 		var xy = getMousePosition(ev);
 		for (var i = 0; i < positions.length; i++) {
-			if (xy.x >= positions[i].position.x1 &&
-			xy.x <= positions[i].position.x2 &&
-			xy.y >= positions[i].position.y1 &&
-			xy.y <= positions[i].position.y2)
-			{
+			if (xy.x >= positions[i].position.x1 && 
+			xy.x <= positions[i].position.x2 && 
+			xy.y >= positions[i].position.y1 && 
+			xy.y <= positions[i].position.y2) 
+			{ 	
+				// alert("123");
 				explain.style.display = "block";
+<<<<<<< HEAD
 				explain.style.backgroundColor = "yellow"
 				explain.style.left = positions[i].position.x2 + 10 +"px";
 				explain.style.top = positions[i].position.y2 + 10 +"px";
+=======
+				explain.style.left = positions[i].position.x2 +"px";
+				explain.style.top = positions[i].position.y2 +"px";
+				word.innerText= positions[i].word;
+>>>>>>> d219323c45cdb64d0719ad5a7fd1668dc7645d83
 			};
 		};
 	};
 
+<<<<<<< HEAD
 	//定时器Handle;
 	var timer1,timer2;
 	getWordPosition(container);
 	createElements ("div", "webcontainer", "id", "explain");
 	createElements ("p", "explain", "id", "word");
 	var explain = document.getElementById("explain");
+=======
+		//定时器Handle;
+		var timer;
+		getWordPosition(container);
+		dictionaryDiv();
+>>>>>>> d219323c45cdb64d0719ad5a7fd1668dc7645d83
 
+	var explain = document.getElementById("explain");
 	// 光标移入字符事件定义
 	container.onmousemove = function (e) {
 		clearTimeout(timer2);
 		setTimeout(function(e) {
 			return function () {
-				judge(e);
+				judge(e);			
 			};
+<<<<<<< HEAD
 		}(e), 1500);
 	};
 /*
 	// 光标移出字符事件定义
+=======
+		}(e), 2000);
+	};
+
+>>>>>>> d219323c45cdb64d0719ad5a7fd1668dc7645d83
 	container.onmouseout = function() {
 		 timer1 = setTimeout(function() {
 			explain.style.display = "none";
-		},1000);
+		},1000);		
 	};
 */
 
@@ -143,12 +172,25 @@ function pointCatcher(container) {
 		timer2 = setTimeout(function() {
 			explain.style.display = "none"
 		},500);
+<<<<<<< HEAD
 	};*/
+=======
+	};
+
+
+
+
+	// var closebtn = document.getElementById("close");
+	// closebtn.onclick =  function () {
+	// 	explain.style.display = "none";
+	// };
+>>>>>>> d219323c45cdb64d0719ad5a7fd1668dc7645d83
 };
 
 /*
 function selectCatcher(container) {
 	//获取选中文字内容;
+<<<<<<< HEAD
 	//function dictionaryDiv() {
 		function createElements (newDiv, target, key, value) {
 			var newDiv = document.createElement(newDiv);
@@ -157,6 +199,8 @@ function selectCatcher(container) {
 			newDiv.setAttribute(key, value);
 		};
 	//};
+=======
+>>>>>>> d219323c45cdb64d0719ad5a7fd1668dc7645d83
 	function getSelect() {
 		var selectTxt;
 		if (window.getSelection) {//标准浏览器支持的方法
@@ -168,11 +212,12 @@ function selectCatcher(container) {
 		return trim(selectTxt.toString());
 	};
 	//删除左右两端的空格;
-	function trim(str) {
+	function trim(str) { 
 		return str.replace(/(^\s*)|(\s*$)/g, "");
-
 	};
+	
 	//鼠标选中事件;
+<<<<<<< HEAD
 	createElements ("div", "webcontainer", "id", "explain");
 	createElements ("p", "explain", "id", "word");
 	container.onmouseup = function(e) {
@@ -190,6 +235,17 @@ function selectCatcher(container) {
 				content = explain.innerText;
 			};
 		},200);
+=======
+	container.onmouseup = function(e) {
+		dictionaryDiv();
+		e = e || window.event;
+		var content = getSelect(e);
+		if (content != "" || null) {
+			explain.style.display = "block";
+			explain.style.top = content.top + content.height + "px";
+			word.innerText = content;
+		};  
+>>>>>>> d219323c45cdb64d0719ad5a7fd1668dc7645d83
 	};
 	return a=1;
 };*/
