@@ -13,7 +13,7 @@ HTMLElement.prototype.bindWordsCatcher = function (methods) {
 	pointCatcher(container);
 	/*while(methods.length) {
 =======
-	}; 
+	};
 
 	while(methods.length) {
 >>>>>>> d219323c45cdb64d0719ad5a7fd1668dc7645d83
